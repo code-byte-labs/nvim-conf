@@ -48,6 +48,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "cssBraces", { fg = colors.orange })
     vim.api.nvim_set_hl(0, "typescriptCastKeyword", { link = "keyword" })
     vim.api.nvim_set_hl(0, "typescriptOperator", { link = "keyword" })
+    vim.api.nvim_set_hl(0, "tsxAttrib", { fg = colors.orange })
   end,
 })
 
