@@ -1,5 +1,5 @@
 return {
-	init_options = {
-		semanticTokens = true
-	}
+  init_options = {
+    semanticTokens = true,
+  },
 }
