@@ -142,11 +142,29 @@ require("conform").setup({
     css = { "biome" },
     json = { "biome" },
     jsonc = { "biome" },
-    python = { "isort", "black" },
+    python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
     javascript = { "biome" },
     typescript = { "biome" },
     javascriptreact = { "biome" },
     typescriptreact = { "biome" },
+  },
+  formatters = {
+    stylua = {
+      prepend_args = { "--column-width", "120", "--indent-type", "Spaces", "--indent-width", "2" },
+    },
+    biome = {
+      args = {
+        "format",
+        "--line-width",
+        "120",
+        "--indent-style",
+        "space",
+        "--indent-width",
+        "2",
+        "--stdin-file-path",
+        "$FILENAME",
+      },
+    },
   },
   format_on_save = {
     -- These options will be passed to conform.format()
