@@ -49,6 +49,20 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "typescriptCastKeyword", { link = "keyword" })
     vim.api.nvim_set_hl(0, "typescriptOperator", { link = "keyword" })
     vim.api.nvim_set_hl(0, "tsxAttrib", { fg = colors.orange })
+    vim.api.nvim_set_hl(0, "@tag.tsx", { link = "Type" })
+    vim.api.nvim_set_hl(0, "@type.tsx", { link = "@variable" })
+    vim.api.nvim_set_hl(0, "@tag.builtin.tsx", { link = "@tag" })
+    vim.api.nvim_set_hl(0, "@markup.heading", { fg = colors.fg })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.variable.readonly.typescriptreact", { fg = colors.yellow })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.variable.readonly.typescript", { fg = colors.yellow })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.variable.readonly.javascript", { fg = colors.yellow })
+    vim.api.nvim_set_hl(0, "@tag.javascript", { link = "Type" })
+    vim.api.nvim_set_hl(0, "@type.javascript", { link = "@variable" })
+    vim.api.nvim_set_hl(0, "@tag.builtin.javascript", { link = "@tag" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.variable.readonly.javascriptreact", { fg = colors.yellow })
+    vim.api.nvim_set_hl(0, "@tag.attribute.javascript", { fg = colors.orange })
+    vim.api.nvim_set_hl(0, "@punctuation.bracket.tsx", { link = "@punctuation.bracket" })
+    vim.api.nvim_set_hl(0, "@punctuation.bracket.typescript", { link = "@punctuation.bracket" })
   end,
 })
 
@@ -56,6 +70,39 @@ vim.cmd("colorscheme onedark")
 local statusline = vim.o.statusline
 statusline = statusline:gsub("%%f", "%%F", 1)
 vim.o.statusline = statusline
+
+-- Tabline: show only the file name (tail) per tab, not the full path.
+function _G.tabline()
+  local s = ""
+  for i = 1, vim.fn.tabpagenr("$") do
+    -- Active tab uses TabLineSel, others use TabLine.
+    s = s .. (i == vim.fn.tabpagenr() and "%#TabLineSel#" or "%#TabLine#")
+    s = s .. "%" .. i .. "T " -- clickable: switches to tab i
+
+    local buflist = vim.fn.tabpagebuflist(i)
+    local winnr = vim.fn.tabpagewinnr(i)
+    local bufnr = buflist[winnr]
+    local name = vim.fn.bufname(bufnr)
+    name = (name == "") and "[No Name]" or vim.fn.fnamemodify(name, ":t")
+
+    -- Modified indicator.
+    local modified = vim.fn.getbufvar(bufnr, "&modified") == 1 and " [+]" or ""
+    s = s .. name .. modified .. " "
+  end
+  s = s .. "%#TabLineFill#%T"
+  return s
+end
+
+vim.o.tabline = "%!v:lua.tabline()"
+vim.o.showtabline = 1 -- 1: only when 2+ tabs; set 2 to always show
+
+-- Parsers are placed manually under parser/ (no nvim-treesitter plugin), so the
+-- filetype -> language mappings must be registered explicitly. The tsx parser is
+-- named "tsx" but the filetype is "typescriptreact"; likewise jsx maps to the
+-- javascript parser. Without this, vim.treesitter.start errors with
+-- "no parser for lang typescriptreact".
+vim.treesitter.language.register("tsx", "typescriptreact")
+vim.treesitter.language.register("javascript", "javascriptreact")
 
 -- Built-in Treesitter does not auto-attach a highlighter in this config.
 -- Start it on buffer filetype detection so custom captures are visible to :Inspect.
