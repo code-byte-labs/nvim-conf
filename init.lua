@@ -186,14 +186,14 @@ require("conform").setup({
   formatters_by_ft = {
     go = { "gofumpt", "goimports" },
     lua = { "stylua" },
-    css = { "biome" },
-    json = { "biome" },
-    jsonc = { "biome" },
+    css = { "biome-check" },
+    json = { "biome-check" },
+    jsonc = { "biome-check" },
     python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-    javascript = { "biome" },
-    typescript = { "biome" },
-    javascriptreact = { "biome" },
-    typescriptreact = { "biome" },
+    javascript = { "biome-check" },
+    typescript = { "biome-check" },
+    javascriptreact = { "biome-check" },
+    typescriptreact = { "biome-check" },
   },
   formatters = {
     stylua = {
