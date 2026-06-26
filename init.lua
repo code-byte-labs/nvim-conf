@@ -6,6 +6,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/stevearc/conform.nvim" },
 })
@@ -135,16 +136,21 @@ require("telescope").setup({
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
+    },
   },
 })
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require("telescope").load_extension("fzf")
+-- ui-select routes vim.ui.select (used by vim.lsp.buf.code_action) through telescope.
+require("telescope").load_extension("ui-select")
 local telescope_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fg", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", telescope_builtin.buffers, { desc = "Telescope buffers" })
-vim.keymap.set("n", "<leader>fh", telescope_builtin.help_tags, { desc = "Telescope help tags" })
+vim.keymap.set("n", "<leader>fr", telescope_builtin.oldfiles, { desc = "Telescope oldfiles" })
 vim.o.autocomplete = true
 vim.o.complete = ".,o,w"
 vim.o.completeopt = "menu,menuone,noselect,popup"
@@ -176,6 +182,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
     vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, { desc = "Go to Implementation" })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
+    -- code_action uses vim.ui.select, which telescope-ui-select renders via telescope.
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
   end,
 })
