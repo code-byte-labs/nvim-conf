@@ -187,7 +187,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.lsp.enable({ "lua_ls", "vtsls", "basedpyright", "gopls", "clangd", "angularls", "biome" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "basedpyright", "gopls", "clangd", "angularls", "biome" })
 
 require("conform").setup({
   formatters_by_ft = {
