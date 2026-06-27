@@ -80,9 +80,9 @@
 ] @string.escape
 
 ; doc-strings
-(expression_statement
-  (string
-    (string_content) @spell) @string.documentation)
+; (expression_statement
+;   (string
+;     (string_content) @spell) @string.documentation)
 
 ; Tokens
 [

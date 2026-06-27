@@ -151,6 +151,12 @@ vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, { desc = "Telesc
 vim.keymap.set("n", "<leader>fg", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", telescope_builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>fr", telescope_builtin.oldfiles, { desc = "Telescope oldfiles" })
+vim.keymap.set(
+  "n",
+  "<leader>fs",
+  telescope_builtin.lsp_dynamic_workspace_symbols,
+  { desc = "Telescope workspace symbols" }
+)
 vim.o.autocomplete = true
 vim.o.complete = ".,o,w"
 vim.o.completeopt = "menu,menuone,noselect,popup"
@@ -187,7 +193,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.lsp.enable({ "lua_ls", "ts_ls", "basedpyright", "gopls", "clangd", "angularls", "biome" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "basedpyright", "gopls", "clangd", "angularls", "biome", "rust_analyzer" })
 
 require("conform").setup({
   formatters_by_ft = {
