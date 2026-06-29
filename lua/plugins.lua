@@ -49,7 +49,17 @@ require("telescope").load_extension("fzf")
 require("telescope").load_extension("ui-select")
 
 -- LSP servers
-vim.lsp.enable({ "lua_ls", "ts_ls", "basedpyright", "gopls", "clangd", "angularls", "biome", "rust_analyzer" })
+vim.lsp.enable({
+  "lua_ls",
+  "ts_ls",
+  "basedpyright",
+  "ruff",
+  "gopls",
+  "clangd",
+  "angularls",
+  "biome",
+  "rust_analyzer",
+})
 
 -- conform (格式化)
 require("conform").setup({
