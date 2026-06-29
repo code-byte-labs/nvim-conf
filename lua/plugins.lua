@@ -10,6 +10,9 @@ vim.pack.add({
   { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/sindrets/diffview.nvim" },
+  { src = "https://github.com/m00qek/baleia.nvim" },
+  { src = "https://github.com/neogitorg/neogit" },
 })
 
 -- nvim-tree (先禁用 netrw)
