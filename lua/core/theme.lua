@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@tag.attribute.javascript", { fg = colors.orange })
     vim.api.nvim_set_hl(0, "@punctuation.bracket.tsx", { link = "@punctuation.bracket" })
     vim.api.nvim_set_hl(0, "@punctuation.bracket.typescript", { link = "@punctuation.bracket" })
+    vim.api.nvim_set_hl(0, "@odp.import_module.python", { link = "Type" })
   end,
 })
 
