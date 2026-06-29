@@ -32,4 +32,8 @@ vim.o.showtabline = 1 -- 1: only when 2+ tabs; set 2 to always show
 
 -- 内建补全
 vim.o.autocomplete = true
+-- 'autocomplete' 每次按键都会触发，但要拉取 LSP 结果必须包含 o(omnifunc)，
+-- 因为 LSP attach 后 omnifunc = vim.lsp.omnifunc。去掉 o 会导致只有 LSP
+-- 触发字符(如 Python 的 ")才出提示，输入字母/空格/删除时不出。
+vim.o.complete = ".,o,w"
 vim.o.completeopt = "menu,menuone,noselect,popup"

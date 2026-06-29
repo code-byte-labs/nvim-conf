@@ -19,6 +19,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Telescope 的 prompt buffer 不需要按键级自动补全 ('autocomplete' 为 global-local)。
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "TelescopePrompt",
+  callback = function(args)
+    vim.bo[args.buf].autocomplete = false
+  end,
+})
+
 -- LSP: 开启自动补全
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
