@@ -12,3 +12,7 @@ vim.keymap.set(
   telescope_builtin.lsp_dynamic_workspace_symbols,
   { desc = "Telescope workspace symbols" }
 )
+
+vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<cr>", { desc = "NvimTree find file" })
+vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<cr>", { desc = "NvimTree toggle" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" })
