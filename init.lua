@@ -1,6 +1,6 @@
 -- 入口文件，只负责加载其他模块
 
-vim.cmd.source("init.vim")
+vim.cmd.source("~/.config/nvim/vimrc")
 
 -- 基础设置
 require("core.options")
