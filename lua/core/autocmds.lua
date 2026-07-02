@@ -47,6 +47,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+-- kotlin.nvim 把库源码 (jar://, jrt://) 反编译进 nofile buffer，但不会 attach
+-- kotlin_lsp，导致进入库源码后无法再次 gd。这里手动 attach，使后续 LSP 跳转可用。
+-- buffer 名就是 jar:// / jrt:// URI，server 能据此识别虚拟文档。
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local name = vim.api.nvim_buf_get_name(args.buf)
+    if not (name:find("^jar://") or name:find("^jrt://")) then
+      return
+    end
+    for _, client in ipairs(vim.lsp.get_clients({ name = "kotlin_lsp" })) do
+      vim.lsp.buf_attach_client(args.buf, client.id)
+    end
+  end,
+})
+
 -- LSP: 缓冲区局部快捷键
 vim.api.nvim_create_augroup("LspAttachGroup", { clear = true })
 
