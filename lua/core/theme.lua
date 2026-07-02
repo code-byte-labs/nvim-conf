@@ -56,6 +56,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@punctuation.bracket.typescript", { link = "@punctuation.bracket" })
     vim.api.nvim_set_hl(0, "@odp.import_module.python", { link = "Type" })
     vim.api.nvim_set_hl(0, "@keyword.operator.lua", { link = "keyword" })
+    vim.api.nvim_set_hl(0, "constructor", { link = "keyword" })
+    vim.api.nvim_set_hl(0, "@variable.parameter.kotlin", { link = "@constant" })
+    vim.api.nvim_set_hl(0, "@punctuation.bracket.kotlin", { fg = colors.fg })
+    vim.api.nvim_set_hl(0, "@variable.builtin.kotlin", { link = "keyword" })
+    vim.api.nvim_set_hl(0, "@attribute.kotlin", { link = "Type" })
+    vim.api.nvim_set_hl(0, "@operator.kotlin", { link = "keyword" })
+    vim.api.nvim_set_hl(0, "@function.builtin.kotlin", { link = "keyword" })
   end,
 })
 

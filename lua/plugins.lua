@@ -62,6 +62,8 @@ vim.lsp.enable({
   "angularls",
   "biome",
   "rust_analyzer",
+  "kotlin_lsp",
+  "jdtls",
 })
 
 -- conform (格式化)
