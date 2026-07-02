@@ -13,6 +13,7 @@ vim.pack.add({
   { src = "https://github.com/sindrets/diffview.nvim" },
   { src = "https://github.com/m00qek/baleia.nvim" },
   { src = "https://github.com/neogitorg/neogit" },
+  { src = "https://github.com/mfussenegger/nvim-jdtls" },
 })
 
 -- nvim-tree (先禁用 netrw)

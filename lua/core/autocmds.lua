@@ -1,7 +1,6 @@
 -- 自动命令 (augroup)
 
 local telescope_builtin = require("telescope.builtin")
-
 -- Treesitter 解析器映射
 -- Parsers are placed manually under parser/ (no nvim-treesitter plugin), so the
 -- filetype -> language mappings must be registered explicitly. The tsx parser is
@@ -37,6 +36,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
     if client:supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+    if client.name == "jdtls" and client:supports_method("textDocument/semanticTokens/full", ev.buf) then
+      vim.defer_fn(function()
+        if vim.api.nvim_buf_is_valid(ev.buf) and vim.bo[ev.buf].filetype == "java" then
+          vim.lsp.semantic_tokens.force_refresh(ev.buf)
+        end
+      end, 300)
     end
   end,
 })
