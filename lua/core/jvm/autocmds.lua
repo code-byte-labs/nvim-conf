@@ -55,6 +55,15 @@ function M.setup(group)
       end
     end,
   })
+
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = group,
+    callback = function()
+      for _, client in ipairs(vim.lsp.get_clients({ name = "kotlin_lsp" })) do
+        vim.lsp.stop_client(client.id, true)
+      end
+    end,
+  })
 end
 
 return M
