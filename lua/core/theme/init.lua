@@ -1,0 +1,35 @@
+local onedark = require("onedarkpro.helpers")
+local colors = onedark.get_colors("onedark")
+
+local common = require("core.theme.common")
+local typescript = require("core.theme.typescript")
+local tsx = require("core.theme.tsx")
+local css = require("core.theme.css")
+local less = require("core.theme.less")
+local html = require("core.theme.html")
+local markup = require("core.theme.markup")
+local javascript = require("core.theme.javascript")
+local jsx = require("core.theme.jsx")
+local lua = require("core.theme.lua")
+local python = require("core.theme.python")
+local nvim_tree = require("core.theme.nvim_tree")
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "onedark",
+  callback = function()
+    common.setup(colors)
+    typescript.setup(colors)
+    tsx.setup(colors)
+    css.setup(colors)
+    less.setup(colors)
+    html.setup(colors)
+    markup.setup(colors)
+    javascript.setup(colors)
+    jsx.setup(colors)
+    lua.setup(colors)
+    python.setup(colors)
+    nvim_tree.setup(colors)
+  end,
+})
+
+vim.cmd("colorscheme onedark")
