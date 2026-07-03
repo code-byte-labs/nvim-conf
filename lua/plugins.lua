@@ -67,12 +67,10 @@ vim.lsp.enable({
 })
 
 -- kotlin.nvim (kotlin-lsp 扩展)
--- 无 Mason，指向 Homebrew 安装的 kotlin-lsp（自带 bin/intellij-server + jbr）
+-- 无 Mason，指向 Homebrew 安装的 kotlin-lsp（自带 bin/intellij-server + jbr）。
+-- Kotlin LSP 和 jdtls 都读 .kotlin-lsp.lua；gd 的 JVM 源码打开/二跳见 lua/core/jvm/。
 vim.env.KOTLIN_LSP_DIR = "/opt/homebrew/opt/kotlin-lsp/libexec"
-require("kotlin").setup({
-  -- intellij-server 自带 JBR 运行 server；此项仅用于分析你的代码时的符号解析
-  jdk_for_symbol_resolution = vim.env.JAVA_HOME,
-})
+require("kotlin").setup({})
 
 -- conform (格式化)
 require("conform").setup({

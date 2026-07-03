@@ -3,5 +3,4 @@ parser/
 .luarc.jsonc
 .DS_Store
 log
-jdtls.lua
-
+.kotlin-lsp.lua

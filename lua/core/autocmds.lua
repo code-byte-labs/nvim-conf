@@ -37,40 +37,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
-    if client.name == "jdtls" and client:supports_method("textDocument/semanticTokens/full", ev.buf) then
-      vim.defer_fn(function()
-        if vim.api.nvim_buf_is_valid(ev.buf) and vim.bo[ev.buf].filetype == "java" then
-          vim.lsp.semantic_tokens.force_refresh(ev.buf)
-        end
-      end, 300)
-    end
-  end,
-})
-
--- kotlin.nvim 把库源码 (jar://, jrt://) 反编译进 nofile buffer，但不会 attach
--- kotlin_lsp，导致进入库源码后无法再次 gd。这里手动 attach，使后续 LSP 跳转可用。
--- buffer 名就是 jar:// / jrt:// URI，server 能据此识别虚拟文档。
-vim.api.nvim_create_autocmd("FileType", {
-  callback = function(args)
-    local name = vim.api.nvim_buf_get_name(args.buf)
-    if not (name:find("^jar://") or name:find("^jrt://")) then
-      return
-    end
-    for _, client in ipairs(vim.lsp.get_clients({ name = "kotlin_lsp" })) do
-      vim.lsp.buf_attach_client(args.buf, client.id)
-    end
   end,
 })
 
 -- LSP: 缓冲区局部快捷键
 vim.api.nvim_create_augroup("LspAttachGroup", { clear = true })
+require("core.jvm.autocmds").setup("LspAttachGroup")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = "LspAttachGroup",
   callback = function(args)
     local bufnr = args.buf
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
-    vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, { buffer = bufnr, desc = "Go to Definition" })
+    vim.keymap.set("n", "gd", require("core.goto").definition, { buffer = bufnr, desc = "Go to Definition" })
     vim.keymap.set("n", "gr", telescope_builtin.lsp_references, { buffer = bufnr, desc = "Find References" })
     vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, { buffer = bufnr, desc = "Go to Implementation" })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
