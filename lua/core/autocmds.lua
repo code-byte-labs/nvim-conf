@@ -42,14 +42,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- LSP: 缓冲区局部快捷键
 vim.api.nvim_create_augroup("LspAttachGroup", { clear = true })
-require("core.jvm.autocmds").setup("LspAttachGroup")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = "LspAttachGroup",
   callback = function(args)
     local bufnr = args.buf
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
-    vim.keymap.set("n", "gd", require("core.goto").definition, { buffer = bufnr, desc = "Go to Definition" })
+    vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, { buffer = bufnr, desc = "Go to Definition" })
     vim.keymap.set("n", "gr", telescope_builtin.lsp_references, { buffer = bufnr, desc = "Find References" })
     vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, { buffer = bufnr, desc = "Go to Implementation" })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })

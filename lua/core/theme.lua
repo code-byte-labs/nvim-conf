@@ -66,7 +66,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@lsp.typemod.decorator.defaultLibrary.kotlin", { link = "Type" })
     vim.api.nvim_set_hl(0, "@lsp.type.decorator.kotlin", { link = "Type" })
     vim.api.nvim_set_hl(0, "@lsp.type.function.kotlin", { fg = colors.fg })
-    vim.api.nvim_set_hl(0, "@lsp.type.method.kotlin", { link = "Type" })
     vim.api.nvim_set_hl(0, "@lsp.typemod.variable.modification.kotlin", { fg = colors.fg })
     vim.api.nvim_set_hl(0, "@lsp.type.modifier.java", { link = "keyword" })
     vim.api.nvim_set_hl(0, "@lsp.typemod.property.readonly.java", { link = "@constant" })
@@ -76,6 +75,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@lsp.typemod.variable.declaration.java", { fg = colors.fg })
     vim.api.nvim_set_hl(0, "@lsp.typemod.method.declaration.kotlin", { link = "@function" })
     vim.api.nvim_set_hl(0, "@punctuation.bracket.java", { fg = colors.fg })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.method.defaultLibrary.kotlin", { link = "@function" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.operator.defaultLibrary.kotlin", { link = "@function" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.readonly.kotlin", { link = "@constant" })
   end,
 })
 

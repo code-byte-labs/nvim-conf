@@ -13,8 +13,6 @@ vim.pack.add({
   { src = "https://github.com/sindrets/diffview.nvim" },
   { src = "https://github.com/m00qek/baleia.nvim" },
   { src = "https://github.com/neogitorg/neogit" },
-  { src = "https://github.com/mfussenegger/nvim-jdtls" },
-  { src = "https://github.com/AlexandrosAlexiou/kotlin.nvim" },
 })
 
 -- nvim-tree (先禁用 netrw)
@@ -65,12 +63,6 @@ vim.lsp.enable({
   "biome",
   "rust_analyzer",
 })
-
--- kotlin.nvim (kotlin-lsp 扩展)
--- 无 Mason，指向 Homebrew 安装的 kotlin-lsp（自带 bin/intellij-server + jbr）。
--- Kotlin LSP 和 jdtls 都读 .kotlin-lsp.lua；gd 的 JVM 源码打开/二跳见 lua/core/jvm/。
-vim.env.KOTLIN_LSP_DIR = "/opt/homebrew/opt/kotlin-lsp/libexec"
-require("kotlin").setup({})
 
 -- conform (格式化)
 require("conform").setup({
