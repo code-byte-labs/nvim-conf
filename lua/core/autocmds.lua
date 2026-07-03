@@ -1,6 +1,5 @@
 -- 自动命令 (augroup)
 
-local telescope_builtin = require("telescope.builtin")
 -- Treesitter 解析器映射
 -- Parsers are placed manually under parser/ (no nvim-treesitter plugin), so the
 -- filetype -> language mappings must be registered explicitly. The tsx parser is
@@ -47,6 +46,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = "LspAttachGroup",
   callback = function(args)
     local bufnr = args.buf
+    local telescope_builtin = require("telescope.builtin")
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
     vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, { buffer = bufnr, desc = "Go to Definition" })
     vim.keymap.set("n", "gr", telescope_builtin.lsp_references, { buffer = bufnr, desc = "Find References" })
