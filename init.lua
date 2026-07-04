@@ -16,3 +16,6 @@ require("core.keymaps")
 
 -- 自动命令 (依赖 telescope)
 require("core.autocmds")
+
+-- DAP 调试配置 (Go / Python / JS / Chrome)
+require("core.dap.init")

@@ -13,6 +13,11 @@ vim.pack.add({
   { src = "https://github.com/sindrets/diffview.nvim" },
   { src = "https://github.com/m00qek/baleia.nvim" },
   { src = "https://github.com/neogitorg/neogit" },
+  { src = "https://github.com/rcarriga/nvim-dap-ui" },
+  { src = "https://github.com/nvim-neotest/nvim-nio" },
+  { src = "https://github.com/mfussenegger/nvim-dap" },
+  { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
+  { src = "https://github.com/leoluz/nvim-dap-go" },
 })
 
 -- nvim-tree (先禁用 netrw)
@@ -72,7 +77,7 @@ require("conform").setup({
     css = { "biome" },
     json = { "biome" },
     jsonc = { "biome" },
-    python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+    python = { "ruff", "ruff_format", "ruff_organize_imports" },
     javascript = { "biome-check" },
     typescript = { "biome-check" },
     javascriptreact = { "biome-check" },
