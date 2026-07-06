@@ -18,4 +18,4 @@ require("core.keymaps")
 require("core.autocmds")
 
 -- DAP 调试配置 (Go / Python / JS / Chrome)
-require("core.dap.init")
+require("core.dap")
