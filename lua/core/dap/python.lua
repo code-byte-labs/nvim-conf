@@ -5,15 +5,20 @@ dap.adapters.python = {
   command = "debugpy-adapter",
 }
 
+dap.adapters.debugpy = {
+  type = "executable",
+  command = "debugpy-adapter",
+}
+
 dap.configurations.python = {
   {
-    type = "python",
+    type = "debugpy",
     request = "launch",
     name = "Launch file",
     program = "${file}",
   },
   {
-    type = "python",
+    type = "debugpy",
     request = "launch",
     name = "Launch file (args)",
     program = "${file}",
@@ -29,7 +34,7 @@ dap.configurations.python = {
     end,
   },
   {
-    type = "python",
+    type = "debugpy",
     request = "attach",
     name = "Attach to remote",
     connect = { host = "localhost", port = 5678 },
