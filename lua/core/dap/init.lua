@@ -22,7 +22,30 @@ vim.fn.sign_define(
   { text = "󰅙", texthl = "DapBreakpointRejected", linehl = "", numhl = "" }
 )
 
-dapui.setup()
+dapui.setup({
+  icons = {
+    collapsed = "",
+    current_frame = "",
+    expanded = "",
+  },
+  layouts = {
+    {
+      elements = {
+        { id = "watches", size = 0.4 },
+        { id = "repl", size = 0.6 },
+      },
+      size = 40,
+      position = "left",
+    },
+    {
+      elements = {
+        "scopes",
+      },
+      size = math.floor(vim.o.lines * 0.4),
+      position = "bottom",
+    },
+  },
+})
 
 dap.listeners.before.attach.dapui = dapui.open
 dap.listeners.before.launch.dapui = dapui.open
@@ -31,7 +54,11 @@ dap.listeners.before.event_exited.dapui = dapui.close
 
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
 vim.keymap.set("n", "<leader>dB", function()
-  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+  vim.ui.input({ prompt = "Breakpoint condition:" }, function(condition)
+    if condition and condition ~= "" then
+      dap.set_breakpoint(condition)
+    end
+  end)
 end, { desc = "DAP conditional breakpoint" })
 vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP continue/start" })
 vim.keymap.set("n", "<leader>dC", dap.run_to_cursor, { desc = "DAP run to cursor" })

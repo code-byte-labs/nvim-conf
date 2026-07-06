@@ -18,7 +18,13 @@ dap.configurations.python = {
     name = "Launch file (args)",
     program = "${file}",
     args = function()
-      local args = vim.fn.input("Arguments: ")
+      local co = coroutine.running()
+      vim.ui.input({ prompt = "Arguments:" }, function(args)
+        vim.schedule(function()
+          coroutine.resume(co, args or "")
+        end)
+      end)
+      local args = coroutine.yield()
       return vim.fn.split(args, " ", true)
     end,
   },

@@ -5,9 +5,6 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
   { src = "https://github.com/nvim-tree/nvim-tree.lua" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
-  { src = "https://github.com/nvim-telescope/telescope.nvim" },
-  { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
-  { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/sindrets/diffview.nvim" },
@@ -18,6 +15,7 @@ vim.pack.add({
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
   { src = "https://github.com/leoluz/nvim-dap-go" },
+  { src = "https://github.com/folke/snacks.nvim" },
 })
 
 -- nvim-tree (先禁用 netrw)
@@ -33,28 +31,18 @@ require("nvim-tree").setup({
   },
 })
 
--- telescope
--- You dont need to set any of these options. These are the default ones. Only
--- the loading is important
-require("telescope").setup({
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true, -- override the file sorter
-      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-      -- the default case_mode is "smart_case"
-    },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown({}),
+-- snacks
+require("snacks").setup({
+  input = {
+    win = {
+      row = false,
+      col = false,
     },
   },
+  picker = {},
 })
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
-require("telescope").load_extension("fzf")
--- ui-select routes vim.ui.select (used by vim.lsp.buf.code_action) through telescope.
-require("telescope").load_extension("ui-select")
+Snacks.input.enable()
+vim.ui.select = Snacks.picker.select
 
 -- LSP servers
 vim.lsp.enable({

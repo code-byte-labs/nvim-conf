@@ -17,9 +17,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Telescope 的 prompt buffer 不需要按键级自动补全 ('autocomplete' 为 global-local)。
+-- Modal/prompt buffer 不需要按键级自动补全 ('autocomplete' 为 global-local)。
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "TelescopePrompt",
+  pattern = { "snacks_picker_input", "snacks_input", "dapui_*", "dap-repl", "dap-float" },
   callback = function(args)
     vim.bo[args.buf].autocomplete = false
   end,
@@ -46,11 +46,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = "LspAttachGroup",
   callback = function(args)
     local bufnr = args.buf
-    local telescope_builtin = require("telescope.builtin")
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
-    vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, { buffer = bufnr, desc = "Go to Definition" })
-    vim.keymap.set("n", "gr", telescope_builtin.lsp_references, { buffer = bufnr, desc = "Find References" })
-    vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, { buffer = bufnr, desc = "Go to Implementation" })
+    vim.keymap.set("n", "gd", Snacks.picker.lsp_definitions, { buffer = bufnr, desc = "Go to Definition" })
+    vim.keymap.set("n", "gr", Snacks.picker.lsp_references, { buffer = bufnr, desc = "Find References" })
+    vim.keymap.set("n", "gi", Snacks.picker.lsp_implementations, { buffer = bufnr, desc = "Go to Implementation" })
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename Symbol" })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
   end,

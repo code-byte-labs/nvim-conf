@@ -1,17 +1,21 @@
 -- 快捷键映射
 
-local telescope_builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>fg", telescope_builtin.live_grep, { desc = "Telescope live grep" })
-vim.keymap.set("n", "<leader>fb", telescope_builtin.buffers, { desc = "Telescope buffers" })
-vim.keymap.set("n", "<leader>fr", telescope_builtin.oldfiles, { desc = "Telescope oldfiles" })
-vim.keymap.set(
-  "n",
-  "<leader>fs",
-  telescope_builtin.lsp_dynamic_workspace_symbols,
-  { desc = "Telescope workspace symbols" }
-)
+vim.keymap.set("n", "<leader>ff", Snacks.picker.files, { desc = "Snacks find files" })
+vim.keymap.set("n", "<leader>fg", Snacks.picker.grep, { desc = "Snacks grep" })
+vim.keymap.set("n", "<leader>fb", Snacks.picker.buffers, { desc = "Snacks buffers" })
+vim.keymap.set("n", "<leader>fr", Snacks.picker.recent, { desc = "Snacks recent files" })
+vim.keymap.set("n", "<leader>fs", Snacks.picker.lsp_workspace_symbols, { desc = "Snacks workspace symbols" })
+vim.keymap.set("n", '<leader>s"', Snacks.picker.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>s/", Snacks.picker.search_history, { desc = "Search History" })
+vim.keymap.set("n", "<leader>sa", Snacks.picker.autocmds, { desc = "Autocmds" })
+vim.keymap.set("n", "<leader>sb", Snacks.picker.lines, { desc = "Buffer Lines" })
+vim.keymap.set("n", "<leader>sc", Snacks.picker.command_history, { desc = "Command History" })
+vim.keymap.set("n", "<leader>sC", Snacks.picker.commands, { desc = "Commands" })
+vim.keymap.set("n", "<leader>sd", Snacks.picker.diagnostics, { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>sD", Snacks.picker.diagnostics_buffer, { desc = "Buffer Diagnostics" })
+vim.keymap.set("n", "<leader>sH", Snacks.picker.highlights, { desc = "Highlights" })
+vim.keymap.set("n", "<leader>sk", Snacks.picker.keymaps, { desc = "Keymaps" })
+vim.keymap.set("n", "<leader>sq", Snacks.picker.qflist, { desc = "Quickfix List" })
 
 vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<cr>", { desc = "NvimTree find file" })
 vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<cr>", { desc = "NvimTree toggle" })

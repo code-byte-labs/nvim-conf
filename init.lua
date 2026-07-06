@@ -11,10 +11,10 @@ require("plugins")
 -- 颜色主题与高亮覆盖 (依赖 onedarkpro，内部应用 colorscheme)
 require("core.theme")
 
--- 快捷键映射 (依赖 telescope)
+-- 快捷键映射 (依赖插件)
 require("core.keymaps")
 
--- 自动命令 (依赖 telescope)
+-- 自动命令
 require("core.autocmds")
 
 -- DAP 调试配置 (Go / Python / JS / Chrome)
