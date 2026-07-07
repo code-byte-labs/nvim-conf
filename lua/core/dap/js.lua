@@ -2,10 +2,11 @@ local dap = require("dap")
 
 local js_adapter = {
   type = "server",
+  host = "127.0.0.1",
   port = "${port}",
   executable = {
     command = "node",
-    args = { "/opt/js-debug/src/dapDebugServer.js", "${port}" },
+    args = { "/opt/js-debug/src/dapDebugServer.js", "${port}", "127.0.0.1" },
   },
 }
 
