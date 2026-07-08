@@ -37,3 +37,10 @@ vim.o.autocomplete = true
 -- 触发字符(如 Python 的 ")才出提示，输入字母/空格/删除时不出。
 vim.o.complete = ".,o,w"
 vim.o.completeopt = "menu,menuone,noselect,popup"
+
+-- 代码折叠：默认用现有 Treesitter fold query；LSP 支持时在 LspAttach 中接管。
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldtext = "v:lua.vim.lsp.foldtext()"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99

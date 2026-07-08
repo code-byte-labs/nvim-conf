@@ -9,6 +9,7 @@ function M.setup(colors)
   vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = colors.fg })
   vim.api.nvim_set_hl(0, "CursorLine", { bg = "#333842" })
   vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { bg = "#333842" })
+  vim.api.nvim_set_hl(0, "@constant.builtin", { link = "@constant" })
 end
 
 return M
