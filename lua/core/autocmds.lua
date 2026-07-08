@@ -57,3 +57,40 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
   end,
 })
+
+-- Echo LSP work-done progress directly in the command area.
+vim.api.nvim_create_autocmd("LspProgress", {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then
+      return
+    end
+
+    local value = ev.data.params.value
+    if type(value) ~= "table" then
+      return
+    end
+
+    local text
+    if value.kind == "end" or (type(value.percentage) == "number" and value.percentage >= 100) then
+      text = ("%s loaded"):format(client.name)
+    else
+      local parts = {}
+      parts[#parts + 1] = client.name
+      if value.title and value.title ~= "" then
+        parts[#parts + 1] = value.title
+      end
+      if value.message and value.message ~= "" then
+        parts[#parts + 1] = value.message
+      end
+      if value.percentage then
+        parts[#parts + 1] = string.format("(%d%%)", value.percentage)
+      end
+      text = #parts > 0 and table.concat(parts, " ") or ("%s working"):format(client.name)
+    end
+
+    vim.schedule(function()
+      vim.api.nvim_echo({ { text } }, false, {})
+    end)
+  end,
+})
