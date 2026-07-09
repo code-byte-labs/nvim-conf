@@ -6,6 +6,7 @@ require("snacks").setup({
     },
   },
   picker = {},
+  scroll = {},
 })
 Snacks.input.enable()
 vim.ui.select = Snacks.picker.select
