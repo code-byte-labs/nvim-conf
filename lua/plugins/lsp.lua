@@ -1,10 +1,11 @@
 vim.lsp.enable({
   "lua_ls",
-  "ts_ls",
+  "tsc",
   "basedpyright",
   "ruff",
   "gopls",
   "clangd",
   "biome",
   "rust_analyzer",
+  "dartls",
 })
