@@ -14,9 +14,11 @@ vim.pack.add({
   { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
   { src = "https://github.com/leoluz/nvim-dap-go" },
   { src = "https://github.com/folke/snacks.nvim" },
+  { src = "https://github.com/windwp/nvim-ts-autotag" },
 })
 
 require("plugins.nvim-tree")
 require("plugins.snacks")
 require("plugins.lsp")
 require("plugins.conform")
+require("plugins.autotag")
