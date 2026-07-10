@@ -5,7 +5,6 @@ vim.lsp.enable({
   "ruff",
   "gopls",
   "clangd",
-  "angularls",
   "biome",
   "rust_analyzer",
 })
