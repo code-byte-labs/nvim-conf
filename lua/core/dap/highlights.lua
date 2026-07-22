@@ -35,6 +35,14 @@ local function reset_hit_breakpoints()
   end
 end
 
+dap.listeners.on_session["dap_breakpoint_hit_sign"] = function(_, session)
+  if session then
+    session.on_close["dap_breakpoint_hit_sign"] = function()
+      vim.schedule(reset_hit_breakpoints)
+    end
+  end
+end
+
 dap.listeners.after.event_stopped["dap_breakpoint_hit_sign"] = function(session, body)
   if body.reason ~= "breakpoint" then
     return
