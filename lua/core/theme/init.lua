@@ -13,6 +13,7 @@ local jsx = require("core.theme.jsx")
 local lua = require("core.theme.lua")
 local python = require("core.theme.python")
 local nvim_tree = require("core.theme.nvim_tree")
+local json = require("core.theme.json")
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "onedark",
@@ -29,6 +30,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     lua.setup(colors)
     python.setup(colors)
     nvim_tree.setup(colors)
+    json.setup(colors)
   end,
 })
 
