@@ -14,6 +14,9 @@ require("core.theme")
 -- 快捷键映射 (依赖插件)
 require("core.keymaps")
 
+-- LSP 特定补丁
+require("core.lsp")
+
 -- 自动命令
 require("core.autocmds")
 
