@@ -6,8 +6,6 @@
   当前配置使用了 `vim.pack.add`、`vim.lsp.enable`、内建 `autocomplete` 和内建 Treesitter 接口，旧版本无法直接工作。
 - `git` 和可访问 GitHub 的网络
   插件通过 `vim.pack.add` 从 GitHub 拉取，首次启动需要能正常 clone。
-- 系统剪贴板支持
-  `vimrc` 中启用了 `set clipboard=unnamedplus`，Linux 下通常需要 `xclip` 或 `wl-clipboard`，否则复制到系统剪贴板的命令不可用。
 - 搜索/终端工具
   `Snacks.picker` 和日常终端工作流建议安装 `rg`、`fd`、`fzf`、`bat`、`jq`、`tree`、`lazygit`。
 
