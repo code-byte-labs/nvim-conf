@@ -15,11 +15,6 @@ set nowrap
 set ruler 
 set noswapfile
 set hlsearch
-" Use OSC 52 over SSH, otherwise use the local system clipboard provider.
-if exists('$SSH_CONNECTION') || exists('$SSH_CLIENT') || exists('$SSH_TTY')
-	let g:clipboard = 'osc52'
-endif
-set clipboard=unnamedplus
 set laststatus=2
 set guicursor=a:ver25
 set termguicolors

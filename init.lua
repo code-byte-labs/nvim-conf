@@ -5,6 +5,9 @@ vim.cmd.source("~/.config/nvim/vimrc")
 -- 基础设置
 require("core.options")
 
+-- 剪贴板 (OSC 52 over SSH / 系统剪贴板本地)
+require("core.clipboard")
+
 -- 插件安装与加载 (vim.pack.add + 各插件 setup)
 require("plugins")
 
