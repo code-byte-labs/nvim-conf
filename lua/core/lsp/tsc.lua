@@ -9,11 +9,8 @@ local function text_edit_text(item)
   if not te then
     return nil
   end
-  if te.range then
+  if te.range or te.insert then
     return te.newText
-  end
-  if te.insert then
-    return te.insert.text
   end
   return nil
 end
@@ -34,6 +31,11 @@ end
 
 function M.setup()
   local completion = vim.lsp.completion
+  if completion._tsc_boundary_patch then
+    return
+  end
+  completion._tsc_boundary_patch = true
+
   local convert_results = completion._convert_results
 
   completion._convert_results = function(line, lnum, cursor_col, client_id, ...)
@@ -67,10 +69,15 @@ function M.setup()
           args[2] = word_boundary
           local wb_char = vim.str_utfindex(line, encoding, word_boundary)
           for _, item in ipairs(items) do
-            if is_bracket_text(text_edit_text(item)) then
+            local start = text_edit_start(item, lnum)
+            if
+              start
+              and is_bracket_text(text_edit_text(item))
+              and vim.str_byteindex(line, encoding, start.character, false) < word_boundary
+            then
               local delete = {
                 range = {
-                  start = { line = lnum, character = dot_char },
+                  start = { line = lnum, character = start.character },
                   ["end"] = { line = lnum, character = wb_char },
                 },
                 newText = "",

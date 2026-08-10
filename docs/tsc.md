@@ -111,7 +111,7 @@ tsc 的成员补全会把 `obj["space prop"]` 这类条目表示成 `textEdit.ra
   accept 时 `on_complete_done` 先插入 `word`（`["foo bar"]`，插在词边界处），
   再应用这段编辑删掉点号，最终 `o.` -> `o["foo bar"]`。
 
-效果（真实 tsc 验证，`~/workspace/js/lab/main.ts`）：
+效果
 
 | 输入 | 候选 | 选中结果 |
 |---|---|---|
@@ -238,7 +238,7 @@ _convert_results(line, lnum, cursor_col, client_id,
 `textDocument/completion`，拿到**原始** `CompletionList`），且都不依赖
 `textEdit.newText` 做匹配、不以 `word`/`startcol` 计算替换范围。
 
-### nvim-cmp（源码见 `~/workspace/lua/nvim-cmp`）
+### nvim-cmp
 
 内部也会算出 `word = "[Symbol]"`，但"匹配 / 展示 / 替换"三者彻底分离：
 
@@ -275,7 +275,7 @@ _convert_results(line, lnum, cursor_col, client_id,
    `filterText` 匹配失败、但 `textEdit.newText` 包含已输入前缀时，用
    `prefix .. filter_text` 重试匹配。`[Symbol]` 正属此类。
 
-### blink.cmp（源码见 `~/workspace/lua/blink.cmp`）
+### blink.cmp
 
 更彻底，**完全不计算 `word`**：
 
@@ -303,6 +303,4 @@ _convert_results(line, lnum, cursor_col, client_id,
 - https://github.com/microsoft/typescript-go/issues/1568
 - https://github.com/microsoft/typescript-go/pull/1579
 - https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion
-- nvim-cmp 源码：`~/workspace/lua/nvim-cmp/lua/cmp/entry.lua`、`lua/cmp/core.lua`
-- blink.cmp 源码：`~/workspace/lua/blink.cmp/lua/blink/cmp/sources/lsp/completion.lua`、
   `lua/blink/cmp/fuzzy/rust/fuzzy.rs`、`lua/blink/cmp/lib/text_edits.lua`
