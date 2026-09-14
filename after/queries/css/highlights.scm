@@ -20,7 +20,7 @@
 
 (class_name) @type
 
-(id_name) @constant
+(id_name) @id
 
 [
   (property_name)
@@ -63,10 +63,10 @@
 
 (pseudo_element_selector
   "::"
-  (tag_name) @attribute)
+  (tag_name) @pseudo)
 
 (pseudo_class_selector
-  (class_name) @attribute)
+  (class_name) @pseudo)
 
 (attribute_name) @tag.attribute
 
@@ -74,17 +74,22 @@
 
 (keyframes_name) @variable
 
+(plain_value) @value
+
 ((property_name) @variable
   (#lua-match? @variable "^[-][-]"))
 
 ((plain_value) @variable
   (#lua-match? @variable "^[-][-]"))
 
-[
-  (string_value)
-  (color_value)
-  (unit)
-] @string
+((plain_value) @property
+  (#lua-match? @property "^%u"))
+
+(string_value) @string
+
+(color_value) @value
+
+(unit) @unit
 
 (integer_value) @number
 
@@ -98,6 +103,24 @@
   "::"
   ";"
 ] @punctuation.delimiter
+
+(id_selector
+  "#" @id)
+
+(class_selector
+  "." @type)
+
+(pseudo_class_selector
+  ":" @pseudo)
+
+(pseudo_element_selector
+  "::" @pseudo)
+
+(child_selector
+  ">" @punctuation.delimiter)
+
+(color_value
+  "#" @value)
 
 [
   "{"
