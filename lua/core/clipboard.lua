@@ -19,5 +19,9 @@ if is_ssh then
   vim.keymap.set('n', 'y', '"+y')
   vim.keymap.set('v', 'y', '"+y')
 else
+  -- XWayland 同时提供 DISPLAY / WAYLAND_DISPLAY，优先使用 xclip。
+  if vim.env.DISPLAY and vim.fn.executable('xclip') == 1 then
+    vim.g.clipboard = 'xclip'
+  end
   vim.opt.clipboard = 'unnamedplus'
 end

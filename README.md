@@ -75,7 +75,7 @@ go install github.com/go-delve/delve/cmd/dlv@latest
 补充说明：
 
 - 剪贴板
-  `vimrc` 里设置了 `clipboard=unnamedplus`。检测到 SSH 会话（`$SSH_CONNECTION` / `$SSH_CLIENT` / `$SSH_TTY`）时会改用 OSC 52（`g:clipboard = 'osc52'`），需要终端支持 OSC 52 才能工作；本机环境下则依赖系统剪贴板 provider，若Linux环境下 `clipboard=unnamedplus` 不生效，补装 `xclip`（X11）或 `wl-clipboard`（Wayland）即可。
+  `lua/core/clipboard.lua` 在本机设置 `clipboard=unnamedplus`。设置了 `$DISPLAY` 且 `xclip` 可用时优先使用 `xclip`（包括 XWayland）；其他情况由 Neovim 自动选择 provider，纯 Wayland 环境可安装 `wl-clipboard`。检测到 SSH 会话（`$SSH_CONNECTION` / `$SSH_CLIENT` / `$SSH_TTY`）时使用 OSC 52 只写复制，粘贴使用终端的 `Ctrl+Shift+V`。
 - JavaScript / TypeScript 调试
   当前 DAP 配置把 `js-debug` 固定写在 `/opt/js-debug/src/dapDebugServer.js`。按照 `history.txt`，可以这样安装：
 
