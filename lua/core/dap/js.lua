@@ -1,9 +1,6 @@
 local dap = require("dap")
 
-local js_debug_server = "/opt/js-debug/src/dapDebugServer.js"
-if vim.fn.filereadable(js_debug_server) == 0 then
-  js_debug_server = vim.fn.stdpath("data") .. "/js-debug/src/dapDebugServer.js"
-end
+local js_debug_server = vim.fn.stdpath("data") .. "/js-debug/src/dapDebugServer.js"
 
 local js_adapter = {
   type = "server",

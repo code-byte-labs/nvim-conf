@@ -77,13 +77,13 @@ go install github.com/go-delve/delve/cmd/dlv@latest
 - 剪贴板
   `lua/core/clipboard.lua` 在本机设置 `clipboard=unnamedplus`。设置了 `$DISPLAY` 且 `xclip` 可用时优先使用 `xclip`（包括 XWayland）；其他情况由 Neovim 自动选择 provider，纯 Wayland 环境可安装 `wl-clipboard`。检测到 SSH 会话（`$SSH_CONNECTION` / `$SSH_CLIENT` / `$SSH_TTY`）时使用 OSC 52 只写复制，粘贴使用终端的 `Ctrl+Shift+V`。
 - JavaScript / TypeScript 调试
-  当前 DAP 配置把 `js-debug` 固定写在 `/opt/js-debug/src/dapDebugServer.js`。按照 `history.txt`，可以这样安装：
+  当前 DAP 配置只使用 Neovim 本地数据目录中的 `js-debug/src/dapDebugServer.js`，数据目录通过 `vim.fn.stdpath("data")` 获取。可以这样安装：
 
 ```bash
 wget https://github.com/microsoft/vscode-js-debug/releases/download/v1.117.0/js-debug-dap-v1.117.0.tar.gz
-tar -xvf js-debug-dap-v1.117.0.tar.gz
-sudo mkdir -p /opt/js-debug
-sudo cp -r js-debug/* /opt/js-debug/
+nvim_data_dir=$(nvim --headless -u NONE -i NONE +'lua io.write(vim.fn.stdpath("data"))' +qa)
+mkdir -p "$nvim_data_dir"
+tar -xvf js-debug-dap-v1.117.0.tar.gz -C "$nvim_data_dir"
 ```
 
 - Dart / Flutter
